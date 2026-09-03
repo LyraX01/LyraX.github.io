@@ -1,0 +1,5 @@
+*margin 0, padding 0, box sizing border box. body font family Arial, sans serif, color white, min height100 vh, display flex, justify content center, align items center, overflow hidden. Arka plan videosu: hash-background-video position fixed, top 0, left0, width 100%, height 100%, object-fit cover, z-index -2. Videonun üzerine koyu bir katman eklemek için body::before content boş, position fixed, inset 0, background rgba (0,0,0, 0.45), z-index -1. Bio kutusu (container) width90%, max-width450px, text align center, padding 30px, background rgba (0,0,0,0.55), border-radius 20px, backdrop filter blur 8px, z-index1. Profil fotoğrafı genişlik 120px, yükseklik 120px, object-fit cover, border-radius 50%, border3px solid white, margin-bottom 15px.
+
+Butonlar için flex column, gap 12px, linkler beyaz, arka plan rgba (255,255,255,0.12),
+
+padding 14px, border-radius12px, hover olduğunda arka plan biraz daha açılıyor (0.25), hafif büyüme efekti (scale1.03) olsun
