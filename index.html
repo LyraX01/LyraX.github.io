@@ -18,11 +18,17 @@
   </style>
 </head>
 <body>
-  <video autoplay loop playsinline id="background-video"><source src="arkaplan-kucuk.mp4" type="video/mp4"></video>
+  <iframe
+  id="background-video"
+  src="https://www.youtube.com/embed/jodJzaVZfj8?autoplay=1&mute=1&loop=1&playlist=jodJzaVZfj8&controls=0&showinfo=0&rel=0"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen>
+</iframe>
   <div class="shade"></div>
   <section class="sound" aria-label="Video sesi"><button id="sound-toggle" aria-label="Sesi aç">🔊</button><input type="range" id="volume" min="0" max="1" value="0.4" step="0.05" aria-label="Ses seviyesi"></section>
 
-  <button class="enter" id="enter-button"><strong>Hazır mısın?</strong><span>[ Tıklayıp gir ]</span></button>
+  <button class="enter" id="enter-button"><strong>Ready?</strong><span>[ Tıkla babus ]</span></button>
   <main class="bio" id="bio" aria-hidden="true">
     <section class="identity">
       <a class="discord-profile" href="https://discord.com/users/740538796558385242" target="_blank" rel="noopener" aria-label="Discord profilini aç">
