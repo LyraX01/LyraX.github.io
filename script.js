@@ -1,39 +1,124 @@
-const video = document.querySelector('#background-video');
+let player;
+let playerReady = false;
+
 const soundButton = document.querySelector('#sound-toggle');
 const volume = document.querySelector('#volume');
 const enterButton = document.querySelector('#enter-button');
 const bio = document.querySelector('#bio');
 
-// Başlangıçta YouTube videosu sessiz
-let muted = true;
+let isMuted = true;
 
-soundButton.addEventListener('click', () => {
-  muted = !muted;
+/* YouTube API hazır olduğunda çalışır */
+function onYouTubeIframeAPIReady() {
 
-  if (muted) {
-    soundButton.textContent = '🔇';
+  player = new YT.Player('background-video', {
+
+    videoId: 'jodJzaVZfj8',
+
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      loop: 1,
+      playlist: 'jodJzaVZfj8',
+      rel: 0,
+      playsinline: 1,
+      modestbranding: 1
+    },
+
+    events: {
+      onReady: function(event) {
+
+        playerReady = true;
+
+        event.target.mute();
+        event.target.setVolume(Number(volume.value));
+
+        event.target.playVideo();
+
+        soundButton.textContent = '🔇';
+      }
+    }
+  });
+}
+
+
+/* Ses aç/kapat */
+soundButton.addEventListener('click', function(event) {
+
+  event.stopPropagation();
+
+  if (!playerReady) return;
+
+  if (isMuted) {
+
+    player.unMute();
+    player.setVolume(Number(volume.value));
+
+    isMuted = false;
+
+    soundButton.textContent = '🔊';
+
   } else {
+
+    player.mute();
+
+    isMuted = true;
+
+    soundButton.textContent = '🔇';
+  }
+});
+
+
+/* Ses seviyesi */
+volume.addEventListener('input', function() {
+
+  if (!playerReady) return;
+
+  const newVolume = Number(this.value);
+
+  player.setVolume(newVolume);
+
+  if (newVolume === 0) {
+
+    player.mute();
+
+    isMuted = true;
+
+    soundButton.textContent = '🔇';
+
+  } else {
+
+    player.unMute();
+
+    isMuted = false;
+
+    soundButton.textContent = '🔊';
+  }
+});
+
+
+/* Giriş butonu */
+enterButton.addEventListener('click', function() {
+
+  /* Kullanıcı tıklaması olduğu için burada ses açılabilir */
+  if (playerReady) {
+
+    player.unMute();
+
+    player.setVolume(Number(volume.value));
+
+    player.playVideo();
+
+    isMuted = false;
+
     soundButton.textContent = '🔊';
   }
 
-  // YouTube iframe'i yeniden yükleyerek sesi değiştir
-  const currentSrc = video.src;
-  video.src = currentSrc.replace(/mute=\d/, `mute=${muted ? 1 : 0}`);
-});
-
-volume.addEventListener('input', () => {
-  // YouTube iframe üzerinden gerçek ses seviyesi kontrolü yapılamaz.
-  // Ses açma/kapama butonu kullanılabilir.
-});
-
-enterButton.addEventListener('click', () => {
+  /* Giriş ekranını kaldır */
   enterButton.classList.add('hide');
-  bio.classList.add('show');
-  bio.setAttribute('aria-hidden', 'false');
 
-  // YouTube videosunu oynat
-  const currentSrc = video.src;
-  if (!currentSrc.includes('autoplay=1')) {
-    video.src = currentSrc + '&autoplay=1';
-  }
+  /* Bio ekranını göster */
+  bio.classList.add('show');
+
+  bio.setAttribute('aria-hidden', 'false');
 });
