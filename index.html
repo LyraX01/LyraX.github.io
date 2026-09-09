@@ -4,51 +4,145 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080808">
+
   <title>LyraX</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
-  <style>
-    .tag { background: rgba(0, 0, 0, .28); }
-    .links a { background: rgba(255, 255, 255, .035); }
-    .links .featured { border-color: rgba(113, 99, 255, .35); background: linear-gradient(110deg, rgba(85, 73, 218, .14), rgba(42, 39, 99, .15)); }
-    .links a:hover, .links a:focus-visible { background: rgba(255, 255, 255, .12); }
-    h1 span { color: #fff; }
-  </style>
 </head>
+
 <body>
-  <iframe
-  id="background-video"
-  src="https://www.youtube.com/embed/jodJzaVZfj8?autoplay=1&mute=1&loop=1&playlist=jodJzaVZfj8&controls=0&showinfo=0&rel=0"
-  frameborder="0"
-  allow="autoplay; encrypted-media"
-  allowfullscreen>
-</iframe>
+
+  <!-- YouTube arka plan videosu -->
+  <div id="background-video"></div>
+
   <div class="shade"></div>
-  <section class="sound" aria-label="Video sesi"><button id="sound-toggle" aria-label="Sesi aç">🔊</button><input type="range" id="volume" min="0" max="1" value="0.4" step="0.05" aria-label="Ses seviyesi"></section>
-<button class="enter" id="enter-button">
-  <strong>Ready?</strong>
-  <span>[ Tıkla babus ]</span>
-</button>
+
+  <!-- Ses kontrolü -->
+  <section class="sound" aria-label="Video sesi">
+    <button id="sound-toggle" aria-label="Sesi aç">🔇</button>
+
+    <input
+      type="range"
+      id="volume"
+      min="0"
+      max="100"
+      value="40"
+      step="5"
+      aria-label="Ses seviyesi"
+    >
+  </section>
+
+  <!-- Giriş ekranı -->
+  <button class="enter" id="enter-button">
+    <strong>LyraX'e Hoş Geldin</strong>
+    <span>[ Tıklayıp gir ]</span>
+  </button>
+
+  <!-- Bio -->
   <main class="bio" id="bio" aria-hidden="true">
+
     <section class="identity">
-      <a class="discord-profile" href="https://discord.com/users/740538796558385242" target="_blank" rel="noopener" aria-label="Discord profilini aç">
-        <div class="avatar-wrap"><img src="dc-profil.jpg" alt="LyraX Discord profil fotoğrafı" class="profile"><i></i></div>
+
+      <a
+        class="discord-profile"
+        href="https://discord.com/users/740538796558385242"
+        target="_blank"
+        rel="noopener"
+        aria-label="Discord profilini aç"
+      >
+        <div class="avatar-wrap">
+          <img
+            src="dc-profil.jpg"
+            alt="LyraX Discord profil fotoğrafı"
+            class="profile"
+          >
+          <i></i>
+        </div>
       </a>
+
       <h1>Lyra<span>X</span></h1>
-      <a class="discord-text" href="https://discord.com/users/740538796558385242" target="_blank" rel="noopener">rakiplere toz yuttur arabaya nos</a>
+
+      <a
+        class="discord-text"
+        href="https://discord.com/users/740538796558385242"
+        target="_blank"
+        rel="noopener"
+      >
+        rakiplere toz yuttur arabaya nos
+      </a>
+
       <div class="tag">L Y R A X</div>
-      <div class="badges" aria-label="Profil rozetleri"><span title="Kral">♛</span><span title="Özel üye">⌁</span><span title="Yıldız">✦</span><span title="Onaylı">◆</span></div>
+
+      <div class="badges" aria-label="Profil rozetleri">
+        <span title="Kral">♛</span>
+        <span title="Özel üye">⌁</span>
+        <span title="Yıldız">✦</span>
+        <span title="Onaylı">◆</span>
+      </div>
+
     </section>
+
     <nav class="links" aria-label="Sosyal medya bağlantıları">
-      <a class="featured" href="https://discord.com/users/740538796558385242" target="_blank" rel="noopener"><span class="discord-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.5 5.2a16.4 16.4 0 0 0-4-1.2l-.5 1a14.4 14.4 0 0 0-6 0l-.5-1a16.4 16.4 0 0 0-4 1.2C2 8.9 1.3 12.5 1.6 16c1.7 1.3 3.4 2 5 2.5l1.2-1.6c-.7-.3-1.3-.7-1.9-1.1l.5-.4c3.6 1.7 7.5 1.7 11.1 0l.5.4c-.6.4-1.2.8-1.9 1.1l1.2 1.6c1.6-.5 3.3-1.2 5-2.5.4-4.1-.7-7.7-2.8-10.8ZM8.8 14.2c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg></span> Discord</a>
-      <a href="https://www.instagram.com/arasd0_0/" target="_blank" rel="noopener"><span class="brand-icon instagram-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.8" r="1" class="fill"/></svg></span> Instagram</a>
-      <a href="https://www.tiktok.com/@arasd0_" target="_blank" rel="noopener"><span class="brand-icon tiktok-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 3v11.1a4.1 4.1 0 1 1-3.1-4v2.4a1.8 1.8 0 1 0 .7 1.5V3h2.4c.4 2.1 1.7 3.4 3.8 3.8v2.4a7.6 7.6 0 0 1-3.8-1.1Z"/></svg></span> TikTok</a>
-      <a href="https://open.spotify.com/user/3122ae54pg2jqpbobafiilqf2suq" target="_blank" rel="noopener"><span class="brand-icon spotify-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7.5 10.1c3.5-1 6.9-.7 9.4.7M8 13.1c2.7-.7 5.4-.5 7.7.5M8.6 15.8c2.1-.5 4.1-.3 5.8.4"/></svg></span> Spotify</a>
+
+      <a
+        class="featured"
+        href="https://discord.com/users/740538796558385242"
+        target="_blank"
+        rel="noopener"
+      >
+        <span class="discord-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M19.5 5.2a16.4 16.4 0 0 0-4-1.2l-.5 1a14.4 14.4 0 0 0-6 0l-.5-1a16.4 16.4 0 0 0-4 1.2C2 8.9 1.3 12.5 1.6 16c1.7 1.3 3.4 2 5 2.5l1.2-1.6c-.7-.3-1.3-.7-1.9-1.1l.5-.4c3.6 1.7 7.5 1.7 11.1 0l.5.4c-.6.4-1.2.8-1.9 1.1l1.2 1.6c1.6-.5 3.3-1.2 5-2.5.4-4.1-.7-7.7-2.8-10.8ZM8.8 14.2c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8 2-1.8 2Z"/>
+          </svg>
+        </span>
+        Discord
+      </a>
+
+      <a href="https://www.instagram.com/arasd0_0/" target="_blank" rel="noopener">
+        <span class="brand-icon instagram-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.3" cy="6.8" r="1" class="fill"/>
+          </svg>
+        </span>
+        Instagram
+      </a>
+
+      <a href="https://www.tiktok.com/@arasd0_" target="_blank" rel="noopener">
+        <span class="brand-icon tiktok-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M14.5 3v11.1a4.1 4.1 0 1 1-3.1-4v2.4a1.8 1.8 0 1 0 .7 1.5V3h2.4c.4 2.1 1.7 3.4 3.8 3.8v2.4a7.6 7.6 0 0 1-3.8-1.1Z"/>
+          </svg>
+        </span>
+        TikTok
+      </a>
+
+      <a href="https://open.spotify.com/user/3122ae54pg2jqpbobafiilqf2suq" target="_blank" rel="noopener">
+        <span class="brand-icon spotify-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M7.5 10.1c3.5-1 6.9-.7 9.4.7M8 13.1c2.7-.7 5.4-.5 7.7.5M8.6 15.8c2.1-.5 4.1-.3 5.8.4"/>
+          </svg>
+        </span>
+        Spotify
+      </a>
+
       <small>LYRAX.COM.TR</small>
+
     </nav>
+
   </main>
+
+  <!-- YouTube API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
   <script src="script.js"></script>
+
 </body>
 </html>
