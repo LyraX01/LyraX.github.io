@@ -4,27 +4,36 @@ const volume = document.querySelector('#volume');
 const enterButton = document.querySelector('#enter-button');
 const bio = document.querySelector('#bio');
 
-video.volume = volume.value;
-video.muted = false;
-video.play().catch(() => { soundButton.textContent = '🔇'; });
+// Başlangıçta YouTube videosu sessiz
+let muted = true;
 
 soundButton.addEventListener('click', () => {
-  video.muted = !video.muted;
-  soundButton.textContent = video.muted ? '🔇' : '🔊';
-  if (!video.muted) video.play();
+  muted = !muted;
+
+  if (muted) {
+    soundButton.textContent = '🔇';
+  } else {
+    soundButton.textContent = '🔊';
+  }
+
+  // YouTube iframe'i yeniden yükleyerek sesi değiştir
+  const currentSrc = video.src;
+  video.src = currentSrc.replace(/mute=\d/, `mute=${muted ? 1 : 0}`);
 });
 
 volume.addEventListener('input', () => {
-  video.volume = volume.value;
-  video.muted = false;
-  soundButton.textContent = '🔊';
+  // YouTube iframe üzerinden gerçek ses seviyesi kontrolü yapılamaz.
+  // Ses açma/kapama butonu kullanılabilir.
 });
 
 enterButton.addEventListener('click', () => {
-  video.muted = false;
-  video.play();
-  soundButton.textContent = '🔊';
   enterButton.classList.add('hide');
   bio.classList.add('show');
   bio.setAttribute('aria-hidden', 'false');
+
+  // YouTube videosunu oynat
+  const currentSrc = video.src;
+  if (!currentSrc.includes('autoplay=1')) {
+    video.src = currentSrc + '&autoplay=1';
+  }
 });
