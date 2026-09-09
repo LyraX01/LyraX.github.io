@@ -1,123 +1,48 @@
-let player;
-let playerReady = false;
-
+const video = document.querySelector('#background-video');
 const soundButton = document.querySelector('#sound-toggle');
 const volume = document.querySelector('#volume');
 const enterButton = document.querySelector('#enter-button');
 const bio = document.querySelector('#bio');
 
-let isMuted = true;
+video.volume = Number(volume.value);
+video.muted = true;
 
-/* YouTube API hazır olduğunda çalışır */
-function onYouTubeIframeAPIReady() {
+video.play().catch(() => {
+  soundButton.textContent = '🔇';
+});
 
-  player = new YT.Player('background-video', {
+soundButton.addEventListener('click', () => {
+  video.muted = !video.muted;
 
-    videoId: 'jodJzaVZfj8',
+  soundButton.textContent = video.muted ? '🔇' : '🔊';
 
-    playerVars: {
-      autoplay: 1,
-      controls: 0,
-      loop: 1,
-      playlist: 'jodJzaVZfj8',
-      rel: 0,
-      playsinline: 1,
-      modestbranding: 1
-    },
+  if (!video.muted) {
+    video.play();
+  }
+});
 
-    events: {
-      onReady: function(event) {
+volume.addEventListener('input', () => {
+  video.volume = Number(volume.value);
 
-        playerReady = true;
-
-        event.target.mute();
-        event.target.setVolume(Number(volume.value));
-
-        event.target.playVideo();
-
-        soundButton.textContent = '🔇';
-      }
-    }
-  });
-}
-
-
-/* Ses aç/kapat */
-soundButton.addEventListener('click', function(event) {
-
-  event.stopPropagation();
-
-  if (!playerReady) return;
-
-  if (isMuted) {
-
-    player.unMute();
-    player.setVolume(Number(volume.value));
-
-    isMuted = false;
-
+  if (video.volume > 0) {
+    video.muted = false;
     soundButton.textContent = '🔊';
-
   } else {
-
-    player.mute();
-
-    isMuted = true;
-
+    video.muted = true;
     soundButton.textContent = '🔇';
   }
 });
 
+enterButton.addEventListener('click', () => {
+  video.muted = false;
+  video.volume = Number(volume.value);
 
-/* Ses seviyesi */
-volume.addEventListener('input', function() {
+  video.play();
 
-  if (!playerReady) return;
+  soundButton.textContent = '🔊';
 
-  const newVolume = Number(this.value);
-
-  player.setVolume(newVolume);
-
-  if (newVolume === 0) {
-
-    player.mute();
-
-    isMuted = true;
-
-    soundButton.textContent = '🔇';
-
-  } else {
-
-    player.unMute();
-
-    isMuted = false;
-
-    soundButton.textContent = '🔊';
-  }
-});
-
-
-/* Giriş butonu */
-enterButton.addEventListener('click', function() {
-
-  /* Kullanıcı tıklaması olduğu için burada ses açılabilir */
-  if (playerReady) {
-
-    player.unMute();
-
-    player.setVolume(Number(volume.value));
-
-    player.playVideo();
-
-    isMuted = false;
-
-    soundButton.textContent = '🔊';
-  }
-
-  /* Giriş ekranını kaldır */
   enterButton.classList.add('hide');
 
-  /* Bio ekranını göster */
   bio.classList.add('show');
 
   bio.setAttribute('aria-hidden', 'false');
